@@ -12,7 +12,7 @@ namespace :thinking_sphinx do
   end
 
   desc 'Like `rake thinking_sphinx:index`, but locks one index at a time.'
-  task :smart_index => :app_env do
+  task :smart_index => :environment do
     ret = ThinkingSphinx::Deltas::SidekiqDelta::CoreIndex.new.smart_index
 
     abort("Indexing failed.") if ret != true
