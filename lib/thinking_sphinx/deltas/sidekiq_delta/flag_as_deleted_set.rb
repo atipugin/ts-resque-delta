@@ -3,15 +3,15 @@ class ThinkingSphinx::Deltas::SidekiqDelta < ThinkingSphinx::Deltas::DefaultDelt
     extend self
 
     def set_name(core_name)
-      "#{ThinkingSphinx::Deltas::SidekiqDelta.job_prefix}:flag.deleted:#{core_name}:set"
+      "#{ThinkingSphinx::Deltas::SidekiqDelta.JOB_PREFIX}:flag.deleted:#{core_name}:set"
     end
 
     def temp_name(core_name)
-      "#{ThinkingSphinx::Deltas::SidekiqDelta.job_prefix}:flag.deleted:#{core_name}:temp"
+      "#{ThinkingSphinx::Deltas::SidekiqDelta.JOB_PREFIX}:flag.deleted:#{core_name}:temp"
     end
 
     def processing_name(core_name)
-      "#{ThinkingSphinx::Deltas::SidekiqDelta.job_prefix}:flag.deleted:#{core_name}:processing"
+      "#{ThinkingSphinx::Deltas::SidekiqDelta.JOB_PREFIX}:flag.deleted:#{core_name}:processing"
     end
 
     def add(core_name, document_id)
