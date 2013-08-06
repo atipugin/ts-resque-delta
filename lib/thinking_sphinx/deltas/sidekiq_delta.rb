@@ -68,6 +68,7 @@ class ThinkingSphinx::Deltas::SidekiqDelta < ThinkingSphinx::Deltas::DefaultDelt
 end
 
 require 'thinking_sphinx/deltas/sidekiq_delta/index_utils'
+require 'thinking_sphinx/deltas/sidekiq_delta/flag_as_deleted_set'
 require 'thinking_sphinx/deltas/sidekiq_delta/core_index'
 require 'thinking_sphinx/deltas/sidekiq_delta/delta_job'
 require 'thinking_sphinx/deltas/sidekiq_delta/flag_as_deleted_job'
