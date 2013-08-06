@@ -13,6 +13,10 @@ namespace :thinking_sphinx do
 
   desc 'Like `rake thinking_sphinx:index`, but locks one index at a time.'
   task :smart_index => :environment do
+    if defined?(Rails) && Rails.env.production? && Rails.application.respond_to?(:eager_load!)
+      Rails.application.eager_load!
+    end
+
     ThinkingSphinx::Deltas::SidekiqDelta::CoreIndex.new.smart_index
   end
 end
