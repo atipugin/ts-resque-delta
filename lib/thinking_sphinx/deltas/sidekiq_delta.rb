@@ -25,6 +25,13 @@ class ThinkingSphinx::Deltas::SidekiqDelta < ThinkingSphinx::Deltas::DefaultDelt
     FlagAsDeletedSet.clear_all!
   end
 
+  def self.prepare_for_core_index(index_name)
+    core  = "#{index_name}_core"
+    delta = "#{index_name}_delta"
+
+    FlagAsDeletedSet.clear!(core)
+  end
+
   # Use simplistic locking.  We're assuming that the user won't run more than one
   # `rake ts:si` or `rake ts:in` task at a time.
   def self.lock(index_name)
