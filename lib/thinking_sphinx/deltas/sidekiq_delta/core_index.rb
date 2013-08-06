@@ -17,8 +17,8 @@ class ThinkingSphinx::Deltas::SidekiqDelta::CoreIndex
     unless @sphinx_indices
       @ts_config ||= ThinkingSphinx::Configuration.instance
       @sphinx_indices = @ts_config.indices.map(&:name)
-
-      @sphinx_indices.reject! { |i| i =~ /_(core|delta)$/}
+        .map { |i| i.gsub(/_(core|delta)$/, '') }
+        .uniq
     end
 
     @sphinx_indices
@@ -68,14 +68,16 @@ class ThinkingSphinx::Deltas::SidekiqDelta::CoreIndex
   #
   # Returns true on success; false on failure.
   def smart_index(opts = {})
-    verbose = opts.fetch(:verbose, true)
-    verbose = false if ENV['SILENT'] == 'true'
+    verbose        = opts.fetch(:verbose, true)
+    verbose        = false if ENV['SILENT'] == 'true'
+    rebuild_config = ENV['INDEX_ONLY'].present? ? ENV['INDEX_ONLY'] : false
 
     # Load config like ts:in.
-    unless ENV['INDEX_ONLY'] == 'true'
+    if rebuild_config
       puts "Generating Configuration to #{ts_config.configuration_file}" if verbose
       ts_config.render_to_file
     end
+
     FileUtils.mkdir_p(ts_config.settings['searchd_file_path'])
 
     # Index each core, one at a time. Wrap with delta locking logic.
