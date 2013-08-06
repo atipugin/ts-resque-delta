@@ -81,7 +81,7 @@ class ThinkingSphinx::Deltas::SidekiqDelta::CoreIndex
     FileUtils.mkdir_p(ts_config.settings['searchd_file_path'])
 
     # Index each core, one at a time. Wrap with delta locking logic.
-    index_prefixes.each do |index_name|
+    sphinx_indices.each do |index_name|
       ret = nil
 
       with_delta_index_lock(index_name) do
