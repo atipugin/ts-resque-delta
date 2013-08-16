@@ -78,7 +78,7 @@ class ThinkingSphinx::Deltas::SidekiqDelta::CoreIndex
       ts_config.render_to_file
     end
 
-    FileUtils.mkdir_p(ts_config.settings['searchd_file_path'])
+    FileUtils.mkdir_p(ts_config.settings['indices_location'])
 
     # Index each core, one at a time. Wrap with delta locking logic.
     sphinx_indices.each do |index_name|
